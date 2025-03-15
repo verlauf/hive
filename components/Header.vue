@@ -1,14 +1,16 @@
 <template>
-  <header class="header">
+  <header v-if="isHeaderVisible" class="header">
     <h1>HIVE</h1>
     <nav>
       <NuxtLink to="/">Home</NuxtLink>
-      <NuxtLink to="/about">About</NuxtLink>
+      <NuxtLink to="/info">Info</NuxtLink>
     </nav>
   </header>
 </template>
 
 <script setup>
+const { isHeaderVisible } = useVisibility();
+console.log(isHeaderVisible);
 </script>
 
 <style scoped>

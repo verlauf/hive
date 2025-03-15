@@ -1,12 +1,14 @@
 <template>
   <div>
-    <HeaderComponent />
+    <Header />
     <main>
       <NuxtPage />
     </main>
+    <Footer />
   </div>
 </template>
 
 <script setup>
-import HeaderComponent from "@/components/HeaderComponent.vue";
+const route = useRoute()
+console.log('route ', route.fullPath)
 </script>
