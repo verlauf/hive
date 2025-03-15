@@ -1,0 +1,28 @@
+@font-face {
+    font-family: "IBM Plex Mono", monospace;
+    src: url('/fonts/IBMPlexMono-Regular.ttf') format('ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+/*
+:root {
+    --bg-color: white;
+    --text-color: black;
+}*/
+
+@media (prefers-color-scheme: dark) {
+    --bg-color: black;
+    --text-color: white;
+}
+
+[data-theme="dark"] {
+    --bg-color: black;
+    --text-color: white;
+}
+
+body {
+    font-family: "IBM Plex Mono", monospace;
+    margin: 0;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}

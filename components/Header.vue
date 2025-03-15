@@ -1,6 +1,9 @@
 <template>
   <header v-if="isHeaderVisible" class="header">
     <h1>HIVE</h1>
+    <button @click="isDark = !isDark">
+     xxx {{ currentTheme }}
+    </button>
     <nav>
       <NuxtLink to="/">Home</NuxtLink>
       <NuxtLink to="/info">Info</NuxtLink>
@@ -9,7 +12,11 @@
 </template>
 
 <script setup>
-const { isHeaderVisible } = useVisibility();
+const { isDark } = useDarkMode();
+
+const currentTheme = computed(() => isDark.value ? "dark" : "light" );
+
+const isHeaderVisible  = useVisibility();
 console.log(isHeaderVisible);
 </script>
 
