@@ -7,14 +7,17 @@ const { isHeaderVisible } = useVisibility();
 <div>
   info
 
-  <button @click="isHeaderVisible = !isHeaderVisible">
+  <button class="btn" @click="isHeaderVisible = !isHeaderVisible">
     {{ isHeaderVisible ? "Header ausblenden" : "Header einblenden" }}
-
   </button>
 
 </div>
 </template>
 
 <style scoped>
+.btn {
+  color: #ffffff;
+  background-color: #2c3e50;
+}
 
 </style>
