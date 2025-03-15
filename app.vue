@@ -1,6 +1,12 @@
 <template>
   <div>
-    <NuxtRouteAnnouncer />
-    <NuxtWelcome />
+    <HeaderComponent />
+    <main>
+      <NuxtPage />
+    </main>
   </div>
 </template>
+
+<script setup>
+import HeaderComponent from "@/components/HeaderComponent.vue";
+</script>
