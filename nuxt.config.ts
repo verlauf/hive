@@ -15,4 +15,5 @@ export default defineNuxtConfig({
       apiBase: "/data"
     }
   },
+  modules: ["@pinia/nuxt"]
 })

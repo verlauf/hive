@@ -1,12 +1,16 @@
 <template>
   <header v-if="isHeaderVisible" class="header">
     <h1>HIVE</h1>
+    <!--
     <button @click="isDark = !isDark">
      xxx {{ currentTheme }}
     </button>
+    -->
     <nav>
       <NuxtLink to="/">Home</NuxtLink>
       <NuxtLink to="/info">Info</NuxtLink>
+      <NuxtLink to="/gallery">Gallery</NuxtLink>
+
     </nav>
   </header>
 </template>

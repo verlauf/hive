@@ -1,15 +1,22 @@
+<script setup>
+defineProps({
+  title: String,
+  description: String,
+  id: Number
+})
+</script>
+
 <template>
-  <div>
-    <h1>Mein Portfolio</h1>
-    <ul>
-      <li v-for="project in data" :key="project.id">
-        <strong>{{ project.title }}</strong>: {{ project.description }}
-      </li>
-    </ul>
-  </div>
+      <div class="item">
+        <strong>{{ title }}</strong>: {{ description }}
+      </div>
 </template>
 
-<script setup>
-const { data } = useApi("/projects");
-console.log('res', data);
-</script>
+<style>
+.item {
+  height: 400px;
+  border: 1px solid #333333;
+  padding: 10px;
+  margin: 10px;
+}
+</style>
