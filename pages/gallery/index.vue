@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import GalleryItem from "~/components/GalleryItem.vue";
+import GalleryItemTile from "~/components/GalleryItemTile.vue";
 const { data } = useApi<Project[]>("/projects");
 
 import { useGridStore } from "~/stores/gridStore";
@@ -8,6 +8,7 @@ import type {Project} from "~/types/projects";
 
 const { columns } = storeToRefs(useGridStore());
 const { setColumns, resetColumns } = useGridStore();
+let isGridView = ref(true);
 onMounted(() => {
   window.addEventListener("resize", updateWidth);
 });
@@ -18,6 +19,11 @@ onUnmounted(() => {
 
 let isGridSelectVisible = true;
 updateWidth()
+
+function setGridView(flag: boolean):void {
+  isGridView.value = flag;
+  console.log(isGridView.value);
+}
 
 function updateWidth(): void {
   const breakpoint = 768;
@@ -34,16 +40,34 @@ function updateWidth(): void {
 
 
 <template>
+  <div>
+    <button @click="setGridView(true)">grid</button>
+    <button @click="setGridView(false)">list</button>
+  </div>
+
+  <div v-if="isGridView">
   <div v-if="isGridSelectVisible">
     <button class="btn" @click="resetColumns()">3</button>
     <button class="btn" @click="setColumns(4)">4</button>
     <button class="btn" @click="setColumns(5)">5</button>
   </div>
+
   <div v-if="data?.length" class="grid-base" :class="`grid-${columns}`">
   <div v-for="item in data" :key="item.id">
-    <gallery-item :title="item.title" :description="item.description" :id="item.id" />
+    <gallery-item-tile :title="item.title" :description="item.description" :id="item.id" />
   </div>
   </div>
+
+  </div>
+<!-- splitting -->
+  <div v-if="!isGridView">
+
+  <div v-for="item in data" :key="item.id">
+    <gallery-item-row :title="item.title" :description="item.description" :id="item.id" />
+  </div>
+  </div>
+
+
 </template>
 
 <style scoped>
