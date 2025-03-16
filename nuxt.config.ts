@@ -15,6 +15,9 @@ export default defineNuxtConfig({
       apiBase: "/data"
     }
   },
+  app: {
+    baseURL: '/hive/'
+  },
   modules: ["@pinia/nuxt"],
   nitro: {
     prerender: {
