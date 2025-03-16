@@ -15,5 +15,12 @@ export default defineNuxtConfig({
       apiBase: "/data"
     }
   },
-  modules: ["@pinia/nuxt"]
+  modules: ["@pinia/nuxt"],
+  nitro: {
+    prerender: {
+      crawlLinks: true,
+      routes: ["/"],
+      ignore: ["/api", "/server", "/backend"] // ignore API routes
+    }
+  }
 })
