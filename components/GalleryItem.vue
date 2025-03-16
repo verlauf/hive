@@ -9,6 +9,7 @@ defineProps({
 <template>
       <div class="item">
         <strong>{{ title }}</strong>: {{ description }}
+        <NuxtLink :to="`/gallery/${id}`">project {{ id }}</NuxtLink>
       </div>
 </template>
 

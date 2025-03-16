@@ -2,13 +2,12 @@
 import GalleryItem from "~/components/GalleryItem.vue";
 const { data } = useApi<Project[]>("/projects");
 
-import { useGridStore } from "@/stores/gridStore";
+import { useGridStore } from "~/stores/gridStore";
 import { storeToRefs } from "pinia";
 import type {Project} from "~/types/projects";
 
 const { columns } = storeToRefs(useGridStore());
 const { setColumns, resetColumns } = useGridStore();
-
 
 </script>
 
