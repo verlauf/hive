@@ -1,10 +1,10 @@
 <template>
   <div>
-    <Header />
+    <ControlPanel/>
     <main>
-      <NuxtPage />
+      <NuxtPage/>
     </main>
-    <Footer />
+    <Footer/>
   </div>
 </template>
 
