@@ -6,16 +6,11 @@ import {useGridStore} from "~/stores/gridStore";
 import {storeToRefs} from "pinia";
 import type {Project} from "~/types/projects";
 
-const {columns, isGalleryViewGrid, isGridView} = storeToRefs(useGridStore());
-
+const {columns, isGalleryViewGrid} = storeToRefs(useGridStore());
 </script>
 
 
 <template>
-  <div>
-
-  </div>
-
   <div v-if="isGalleryViewGrid">
     <div v-if="data?.length" class="grid-base" :class="`grid-${columns}`">
       <div v-for="item in data" :key="item.id">

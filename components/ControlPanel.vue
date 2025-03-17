@@ -1,10 +1,9 @@
 <script setup>
 import {useGridStore} from "~/stores/gridStore";
-import {storeToRefs} from "pinia";
+import {useControlPanelStore} from "~/stores/controlPanel.js";
 
-const {columns} = storeToRefs(useGridStore());
 const {setColumns, setGalleryListView, resetColumns, showGridPanel, hideGridPanel} = useGridStore();
-
+const {isControlPanelMinimized} = storeToRefs(useControlPanelStore());
 onMounted(() => {
   window.addEventListener("resize", updateWidth);
 });
@@ -32,38 +31,53 @@ function updateWidth() {
 </script>
 
 <template>
-  <div class="panel">
+  <div class="panel" :class="isControlPanelMinimized ? 'minimize' : ''">
     <nav class="nav-bar">
+      <span class="logo">
+      <NuxtLink to="/"></NuxtLink>
+      </span>
       <span>
-      <NuxtLink to="/">H</NuxtLink>
       <NuxtLink to="/info">Info</NuxtLink>
-        </span>
+      </span>
+
       <span>
       <button class="btn-nav" @click="setColumns(3)">3</button>
       <button class="btn-nav" @click="setColumns(4)">4</button>
       <button class="btn-nav" @click="setColumns(5)">5</button>
-        </span>
-      <button class="btn-nav" @click="setGalleryListView()">
-        List
-      </button>
+      <button class="btn-nav" @click="setGalleryListView()">List</button>
+      </span>
     </nav>
   </div>
+
 </template>
 
 <style scoped>
-.panel {
-  width: 50vw;
-  background: white;
-  position: sticky;
-  top: 50px;
-  left: 50%;
-  transform: translateX(-50%);
-  padding: 5px;
-  border-radius: 60px;
-  border: 1px solid #2c3e50;
+.logo {
+  background: #2c3e50;
+  width: 40px;
+  height: 40px;
+  border-radius: 40px;
 }
 
-.panel:hover {
+.panel {
+  z-index: 10000;
+  width: 40vw;
+  background: white;
+  position: fixed;
+  top: 50px;
+  left: 50%;
+  heigth: 50px;
+  transform: translateX(-50%);
+  padding: 8px;
+  border-radius: 60px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  overflow: hidden;
+  transition: width 1s;
+}
+
+.minimize {
+  width: 40px !important;
+  transition: width 1s;
 }
 
 .btn-nav {
@@ -72,17 +86,11 @@ function updateWidth() {
 }
 
 .nav-bar {
-  padding: 20px;
-  color: #2c3e50;
   display: flex;
+  color: #2c3e50;
   justify-content: space-between;
-}
-
-nav a {
-  margin-left: 1rem;
-  text-decoration: none;
-}
-
-nav a:hover {
+  align-items: center;
+  width: 38vw;
+  white-space: nowrap;
 }
 </style>
