@@ -3,6 +3,7 @@ import {useGridStore} from "~/stores/gridStore";
 import {useControlPanelStore} from "~/stores/controlPanel.js";
 
 const {setColumns, setGalleryListView, resetColumns, showGridPanel, hideGridPanel} = useGridStore();
+const {minimizeControlPanel, maximizeControlPanel} = useControlPanelStore();
 const {isControlPanelMinimized} = storeToRefs(useControlPanelStore());
 onMounted(() => {
   window.addEventListener("resize", updateWidth);
@@ -31,7 +32,13 @@ function updateWidth() {
 </script>
 
 <template>
-  <div class="panel" :class="isControlPanelMinimized ? 'minimize' : ''">
+  <div
+    @mouseover="maximizeControlPanel()"
+    @mouseleave="minimizeControlPanel()"
+    class="panel"
+    :style="{ width: isControlPanelMinimized ? '40px' : '40vw' }"
+  >
+
     <nav class="nav-bar">
       <span class="logo">
       <NuxtLink to="/"></NuxtLink>
@@ -61,7 +68,7 @@ function updateWidth() {
 
 .panel {
   z-index: 10000;
-  width: 40vw;
+  /* width: 40vw;*/
   background: white;
   position: fixed;
   top: 50px;
@@ -76,7 +83,7 @@ function updateWidth() {
 }
 
 .minimize {
-  width: 40px !important;
+  /*width: 40px !important;*/
   transition: width 1s;
 }
 
