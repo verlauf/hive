@@ -1,16 +1,15 @@
 <script setup lang="ts">
 import GalleryItemTile from "~/components/GalleryItemTile.vue";
-
-const {data} = useApi<Project[]>("/projects");
 import {useGridStore} from "~/stores/useGridStore";
-//import {storeToRefs} from "pinia";
 import type {Project} from "~/types/projects";
+import {toNumberSafe} from "~/utils/utils";
 
 const gridStore = useGridStore();
+const {data} = useApi<Project[]>("/projects");
+const route = useRoute()
 
-const {columns, isGalleryViewGrid} = storeToRefs(useGridStore());
+gridStore.setGalleryColumns(toNumberSafe(route.query?.grid, 3))
 </script>
-
 
 <template>
   <div v-if="gridStore.isGalleryViewGrid">
@@ -19,7 +18,6 @@ const {columns, isGalleryViewGrid} = storeToRefs(useGridStore());
         <gallery-item-tile :title="item.title" :description="item.description" :id="item.id"/>
       </div>
     </div>
-
   </div>
   <div v-if="!gridStore.isGalleryViewGrid">
     <div v-for="item in data" :key="item.id">

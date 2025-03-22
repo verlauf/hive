@@ -1,17 +1,14 @@
 <script setup lang="ts">
-import {Button} from "~/enums.ts";
-//import {storeToRefs} from "pinia";
-import {useGridStore} from "~/stores/useGridStore.js";
-import {useControlPanelStore} from "~/stores/useControlPanelStore.ts";
-import {useThemeStore} from "~/stores/useThemeStore.ts";
-import {useActiveButton} from "~/stores/useActiveButton.ts";
+import {Button} from "~/enums";
+import {useGridStore} from "~/stores/useGridStore";
+import {useControlPanelStore} from "~/stores/useControlPanelStore";
+import {useThemeStore} from "~/stores/useThemeStore";
+import {useActiveButton} from "~/stores/useActiveButton";
 
 const gridStore = useGridStore();
-
 const route = useRoute();
 const {setActiveButton} = useActiveButton();
 const {activeButton} = storeToRefs(useActiveButton());
-// const {setColumns, setGalleryListView, resetColumns, showGridPanel, hideGridPanel} = useGridStore();
 const {minimizeControlPanel, maximizeControlPanel} = useControlPanelStore();
 const {isControlPanelMinimized} = storeToRefs(useControlPanelStore());
 
@@ -19,8 +16,6 @@ const {toggleTheme} = useThemeStore();
 const {isDarkMode} = storeToRefs(useThemeStore());
 
 onMounted(() => {
-  console.log('useRoute', route.query.grid);
-
   window.addEventListener("resize", updateWidth);
 });
 
@@ -36,12 +31,12 @@ function updateWidth() {
 
   if (window.innerWidth < breakpoint && isGridSelectVisible) {
     isGridSelectVisible = false;
-    hideGridPanel();
-    setColumns(1);
+    gridStore.hideGridPanel();
+    gridStore.setGalleryColumns(1);
   } else if (window.innerWidth > breakpoint && !isGridSelectVisible) {
-    resetColumns();
+    gridStore.setGalleryColumns(3);
     isGridSelectVisible = true;
-    showGridPanel();
+    gridStore.showGridPanel();
   }
 }
 </script>
@@ -66,34 +61,33 @@ function updateWidth() {
       <button
         class="btn-nav"
         :disabled="activeButton === Button.Grid3"
-        @click="gridStore.setColumns(3); setActiveButton(Button.Grid3)">3
+        @click="gridStore.setGalleryColumns(3); setActiveButton(Button.Grid3)">3
       </button>
 
          <button
            class="btn-nav"
            :disabled="activeButton === Button.Grid4"
-           @click="gridStore.setColumns(4); setActiveButton(Button.Grid4)">
+           @click="gridStore.setGalleryColumns(4); setActiveButton(Button.Grid4)">
            {{ Button.Grid4 }}
       </button>
 
          <button
            class="btn-nav"
            :disabled="activeButton === Button.Grid5"
-           @click="gridStore.setColumns(5);
+           @click="gridStore.setGalleryColumns(5);
            setActiveButton(Button.Grid5)">{{ Button.Grid5 }}
       </button>
 
 
       <button class="btn-nav"
               :disabled="activeButton === Button.List"
-              @click="gridStore.setGalleryListView();
+              @click="gridStore.setGalleryColumns(0);
               setActiveButton(Button.List)">
         {{ Button.List }}
       </button>
 
         <button class="btn-nav"
-                :disabled="activeButton === Button.Theme"
-                @click="toggleTheme(); setActiveButton(Button.Theme)">
+                @click="toggleTheme()">
           <i v-if="isDarkMode" class="fa-solid fa-moon"></i>
           <i v-else class="fa-solid fa-sun"></i>
         </button>
