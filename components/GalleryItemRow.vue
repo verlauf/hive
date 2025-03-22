@@ -7,17 +7,22 @@ defineProps({
 </script>
 
 <template>
-      <div class="item2">
-        <strong>{{ title }}</strong>: {{ description }}
-        <NuxtLink :to="`/gallery/${id}`">project {{ id }}</NuxtLink>
-      </div>
+  <div class="row">
+    <strong>{{ title }}</strong>: {{ description }}
+    <NuxtLink :to="`/gallery/${id}`">project {{ id }}</NuxtLink>
+  </div>
 </template>
 
 <style>
-.item2 {
-  border: 1px solid #333333;
+.row {
   padding: 10px;
   margin: 10px;
-  background: #cccccc;
+  background: var(--bg-tile);
+}
+
+[data-theme="dark"] {
+  .row {
+    background: var(--bg-tile-dark);
+  }
 }
 </style>

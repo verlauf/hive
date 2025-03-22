@@ -1,12 +1,29 @@
 <script setup>
-import {useControlPanelStore} from "~/stores/controlPanel.js";
+import {useControlPanelStore} from "~/stores/useControlPanelStore.ts";
 import {storeToRefs} from "pinia";
 import Gallery from "~/components/Gallery.vue";
+import {useThemeStore} from "~/stores/useThemeStore.js";
 
+const {initTheme} = useThemeStore();
 const {isControlPanelMinimized} = storeToRefs(useControlPanelStore());
 const {minimizeControlPanel, maximizeControlPanel} = useControlPanelStore();
 
+import {useHead} from '#imports'
+
+useHead({
+  script: [
+    {
+      src: 'https://kit.fontawesome.com/16f6774484.js',
+      async: true,
+      crossorigin: 'anonymous'
+    }
+  ]
+})
+
+
 onMounted(() => {
+  initTheme();
+
   window.addEventListener('scroll', (e) => {
     if (!isControlPanelMinimized.value && window.scrollY > 100) {
       minimizeControlPanel();

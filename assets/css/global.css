@@ -5,21 +5,25 @@
   font-style: normal;
 }
 
-/*
 :root {
-    --bg-color: white;
-    --text-color: black;
-}*/
+  --bg-color: #FFFFFF;
+  --text-color: #999;
+  --bg-tile: #f3f3f3;
 
-@media (prefers-color-scheme: dark) {
-  --bg-color: black;
-  --text-color: white;
+  /* DARK MODE */
+  --bg-dark: #292929;
+  --text-color-dark: #ccc;
+  --bg-tile-dark: #363636;
 }
 
 [data-theme="dark"] {
-  --bg-color: black;
-  --text-color: white;
+  body {
+    background-color: var(--bg-dark);
+    color: var(--text-color-dark);
+  }
 }
+
+/* LIGHT MODE */
 
 body {
   font-family: "IBM Plex Mono", monospace;
