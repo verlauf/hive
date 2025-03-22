@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import {useControlPanelStore} from "~/stores/useControlPanelStore.ts";
 import {storeToRefs} from "pinia";
-import Gallery from "~/components/Gallery.vue";
 import {useThemeStore} from "~/stores/useThemeStore.js";
 
 
@@ -51,7 +50,6 @@ onUnmounted(() => {
 
   <div>
     <main>
-      <Gallery/>
       <NuxtPage/>
     </main>
     <Footer/>

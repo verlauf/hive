@@ -2,12 +2,19 @@
 defineProps({
   title: String,
   description: String,
-  id: Number
+  id: Number,
+  position: {
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+  }
 })
 </script>
 
 <template>
   <div class="tile">
+    {{ position.left }} {{ position.top }}
     <strong>{{ title }}</strong>: {{ description }}
     <NuxtLink :to="`/gallery/${id}`">project {{ id }}</NuxtLink>
   </div>
