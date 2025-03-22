@@ -6,14 +6,19 @@ import {useThemeStore} from "~/stores/useThemeStore";
 import {useActiveButton} from "~/stores/useActiveButton";
 
 const gridStore = useGridStore();
-const route = useRoute();
 const {setActiveButton} = useActiveButton();
 const {activeButton} = storeToRefs(useActiveButton());
 const {minimizeControlPanel, maximizeControlPanel} = useControlPanelStore();
 const {isControlPanelMinimized} = storeToRefs(useControlPanelStore());
-
 const {toggleTheme} = useThemeStore();
 const {isDarkMode} = storeToRefs(useThemeStore());
+const nuxtApp = useNuxtApp();
+const route = useRoute();
+let isGalleryRoute = ref(false);
+
+nuxtApp.hooks.hook('page:finish', () => {
+  isGalleryRoute.value = (route.path === '/');
+})
 
 onMounted(() => {
   window.addEventListener("resize", updateWidth);
@@ -57,7 +62,7 @@ function updateWidth() {
       <NuxtLink to="/info">Info</NuxtLink>
       </span>
 
-      <span>
+      <span v-if="isGalleryRoute">
       <button
         class="btn-nav"
         :disabled="activeButton === Button.Grid3"
@@ -85,13 +90,13 @@ function updateWidth() {
               setActiveButton(Button.List)">
         {{ Button.List }}
       </button>
-
-        <button class="btn-nav"
-                @click="toggleTheme()">
-          <i v-if="isDarkMode" class="fa-solid fa-moon"></i>
-          <i v-else class="fa-solid fa-sun"></i>
-        </button>
       </span>
+
+      <button class="btn-nav"
+              @click="toggleTheme()">
+        <i v-if="isDarkMode" class="fa-solid fa-moon"></i>
+        <i v-else class="fa-solid fa-sun"></i>
+      </button>
     </nav>
   </div>
 </template>

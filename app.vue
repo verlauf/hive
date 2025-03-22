@@ -1,9 +1,12 @@
-<script setup>
+<script setup lang="ts">
 import {useControlPanelStore} from "~/stores/useControlPanelStore.ts";
 import {storeToRefs} from "pinia";
 import Gallery from "~/components/Gallery.vue";
 import {useThemeStore} from "~/stores/useThemeStore.js";
 
+
+const nuxtApp = useNuxtApp()
+const route = useRoute()
 const {initTheme} = useThemeStore();
 const {isControlPanelMinimized} = storeToRefs(useControlPanelStore());
 const {minimizeControlPanel, maximizeControlPanel} = useControlPanelStore();
@@ -23,6 +26,7 @@ useHead({
 
 onMounted(() => {
   initTheme();
+
 
   window.addEventListener('scroll', (e) => {
     if (!isControlPanelMinimized.value && window.scrollY > 100) {

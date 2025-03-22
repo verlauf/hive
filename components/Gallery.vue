@@ -1,3 +1,10 @@
+<script setup>
+
+</script>
+<template>
+  
+</template>
+<!--
 <script setup lang="ts">
 import GalleryItemTile from "~/components/GalleryItemTile.vue";
 import {useGridStore} from "~/stores/useGridStore";
@@ -54,3 +61,4 @@ gridStore.setGalleryColumns(toNumberSafe(route.query?.grid, 3))
 }
 
 </style>
+-->
